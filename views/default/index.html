@@ -1,0 +1,19 @@
+{{extend 'layout.html'}}
+
+<section>
+    <h3>Popular projects</h3>
+    <ul class="smorgasbord">
+    {{for project in popular:}}
+        {{include 'partials/project.html'}}
+    {{pass}}
+    </ul>
+</section>
+
+<section>
+    <h3>Recently created projects</h3>
+    <ul class="smorgasbord">
+    {{for project in recent:}}
+        {{include 'partials/project.html'}}
+    {{pass}}
+    </ul>
+</section>

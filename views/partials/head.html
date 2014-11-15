@@ -1,0 +1,14 @@
+<title>{{=response.title or request.application}}</title>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="shortcut icon" href="{{=URL('static','favicon.ico')}}" type="image/x-icon" />
+
+<!-- <script src="{{=URL('static','js/modernizr.custom.js')}}"></script> -->
+
+{{
+response.files.insert(0,URL('static','css/bootup.css'))
+}}
+
+{{include 'web2py_ajax.html'}}

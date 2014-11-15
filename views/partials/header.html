@@ -1,0 +1,25 @@
+
+<header class="site-header">
+    <a class="site-logo" href="{{=URL('default', 'index')}}">BootUp</a>
+
+    {{if auth.user:}}
+        <p class="logged-in">
+            Logged in as
+            {{=STRONG(auth.user.username)}}
+        </p>
+    {{pass}}
+
+    <div class="site-navigation"><!-- <nav></nav> is not quite correct here (it is used below) -->
+        <form class="search" action="{{=URL('projects', 'search')}}" method="GET">
+            <label>
+                Search projects:
+                <input type="search" name="search" value="{{if request.vars.search:}}{{=request.vars.search}}{{pass}}" required />
+            </label>
+            <input type="submit" value="Search" />
+        </form>
+
+        {{if response.user_menu:}}
+            {{=MENU(response.user_menu, _class='user-menu')}}
+        {{pass}}
+    </div>
+</header>

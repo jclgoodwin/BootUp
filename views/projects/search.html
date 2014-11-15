@@ -1,0 +1,12 @@
+{{extend 'layout.html'}}
+
+<h2>
+    {{=T("%s %%{project} matching", symbols=len(results))}}
+    &lsquo;{{=request.vars.search}}&rsquo;
+</h3>
+
+<ul class="smorgasbord">
+{{for project in results:}}
+    {{include 'partials/project.html'}}
+{{pass}}
+</ul>

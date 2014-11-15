@@ -1,0 +1,207 @@
+/* base styles */
+
+body {
+    color: #1a1a1a;
+    font-family: Helmet, FreeSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    margin: 0 auto;
+    padding: 0 10px;
+    max-width: 1000px;
+}
+
+a {
+    color: rgb(12, 12, 238);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+a:focus,
+a:active {
+    background: #eee;
+}
+
+
+/* header */
+
+.site-header {
+    position: relative;
+    margin: 0 -10px 36px;
+}
+
+.site-logo {
+    color: inherit;
+    display: inline-block;
+    font-size: 48px;
+    font-weight: normal;
+    margin: 10px;
+    margin-top: 24px;
+}
+
+.logged-in {
+    bottom: 30px;
+    position: absolute;
+    right: 10px;
+}
+
+/* horizontal navigation in header */
+
+.site-navigation {
+    background: #efefff;
+    clear: both;
+    margin: 0;
+    overflow: hidden;
+}
+
+    .site-navigation .user-menu {
+        float: right;
+        margin: 0;
+        padding: 0;
+    }    
+    
+    .site-navigation li {
+        display: inline-block;
+    }
+    
+    .site-navigation a {
+        display: inline-block;
+        padding: 10px;
+    }
+    
+    .site-navigation a:hover,
+    .site-navigation a:focus,
+    .site-navigation a:active {
+        background: #cfcfff;
+    }
+
+    .site-navigation .search {
+        float: left;
+    }
+    
+        .site-navigation .search label {
+            display: inline-block;
+            padding-top: 10px;
+            padding-left: 10px;
+        }
+
+
+/* large feedback messages */
+
+.flash {
+    background: #ff6; /* pale yellow */
+    border: 1px solid #ee0; /* dark yellow */
+    border-radius: 4px;
+    margin: 36px 0;
+    padding: 8px 10px;
+}
+
+    #closeflash {
+        float: right;
+        font-size: 14px;
+    }
+
+h2,
+h3 {
+    margin: 36px 0 16px;
+}
+
+
+/* forms */
+
+form table {
+    border-collapse: collapse;
+}
+
+form td {
+    padding-bottom: 10px;
+}
+
+.w2p_fl { /* table cell containing form field label */
+    text-align: right;
+    padding-right: 10px;
+    vertical-align: top;
+}
+
+.w2p_fw { /* table cell containing form field */
+    vertical-align: bottom;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+}
+
+/*.btn {
+    background: #eee;
+    border: 0;
+    border-bottom: 2px solid #ccc;
+    border-radius: 4px;
+    color: black;
+    font-size: 14px;
+    margin-right: 10px;
+    padding: 5px 8px;
+}
+
+*/
+main .btn[type=submit] {
+    font-size: 16px;
+}
+
+/*
+.btn:hover {
+    background: #ddd;
+}
+
+.btn:focus,
+.btn:active {
+    background: #ccc;
+}
+*/
+
+
+/*
+smorgasbord -- a collection of projects
+    (each rendered using the `partials/project.html`)
+    on a 'browse' or 'search results' or other page
+
+    arranged horizontally on a five-column grid
+
+    projects are separated by 20 pixels of space
+    */
+
+.smorgasbord {
+    margin: 0 -10px 36px;
+    overflow: hidden;
+    padding: 0;
+}
+
+    .smorgasbord li {
+        float: left;
+        list-style: none;
+        width: 20%;
+        padding: 0 10px;
+    }
+
+        .smorgasbord li > a {
+            display: block;
+        }
+
+        .smorgasbord h4 {
+            font-weight: normal;
+            font-size: 18px;
+            margin: 10px 0 0;
+        }
+
+        .smorgasbord img {
+            display: block;
+            height: auto;
+            width: 100%;
+        }
+
+        .smorgasbord .thumbnail-container {
+            height: 66%;
+            overflow: hidden;
+        }

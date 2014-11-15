@@ -1,0 +1,11 @@
+{{extend 'layout.html'}}
+
+
+<section>
+    <h3>Your projects</h3>
+    <ul class="smorgasbord">
+    {{for project in projects:}}
+        {{include 'partials/project.html'}}
+    {{pass}}
+    </ul>
+</section>
