@@ -1,3 +1,23 @@
 {{extend 'layout.html'}}
 
 <h2>{{=project.title}}</h2>
+
+<p>{{=project.short_description}}</p>
+
+<section id="backers">
+    <h3>Available pledges</h3>
+</section>
+
+<figure>
+    {{=IMG(_alt='', _src=URL('default/download', project.picture))}}
+</figure>
+
+<section id="long-text">
+
+    {{=MARKMIN(project.long_description)}}
+
+    <h3>Story</h3>
+
+    {{=MARKMIN(project.story)}}
+
+</section>

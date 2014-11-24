@@ -205,3 +205,33 @@ smorgasbord -- a collection of projects
             height: 66%;
             overflow: hidden;
         }
+
+/* styles for single project pages */
+
+figure {
+    margin: 0;
+}
+
+#backers {
+    float: right;
+    margin-bottom: 36px;
+    width: 25%;
+}
+
+    #backers h3 {
+        margin-top: 0;
+    }
+
+
+figure,
+#long-text {
+    box-sizing: border-box;
+    padding-right: 20px;
+    width: 75%;
+}
+
+main img {
+    height: auto;
+    max-width: 100%;
+}
+

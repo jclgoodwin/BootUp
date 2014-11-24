@@ -1,8 +1,27 @@
 {{extend 'layout.html'}}
 
+<h2>Dashboard</h2>
 
 <section>
-    <h3>Your projects</h3>
+    <h3>Projects open</h3>
+    <ul class="smorgasbord">
+    {{for project in projects:}}
+        {{include 'partials/project.html'}}
+    {{pass}}
+    </ul>
+</section>
+
+<section>
+    <h3>Funded projects</h3>
+    <ul class="smorgasbord">
+    {{for project in projects:}}
+        {{include 'partials/project.html'}}
+    {{pass}}
+    </ul>
+</section>
+
+<section>
+    <h3></h3>
     <ul class="smorgasbord">
     {{for project in projects:}}
         {{include 'partials/project.html'}}

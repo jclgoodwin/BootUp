@@ -6,7 +6,8 @@ auth = Auth(db)
 
 if auth.is_logged_in():
     response.user_menu = [
-        (T('Dashboard'), False, URL('default', 'dashboard')),
+        (T('Projects dashboard'), False, URL('default', 'dashboard')),
+        (T('Profile'), False, URL('default', 'user/profile')),
         (T('Log out'), False, URL('default', 'user/logout')),
     ]
 else:

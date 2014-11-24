@@ -1,19 +1,26 @@
 # -*- coding: utf-8 -*-
-# this file is released under public domain and you can use without limitations
 
-#########################################################################
-## This is a sample controller
-## - index is the default action of any application
-## - user is required for authentication and authorization
-## - download is for downloading files uploaded in the db (does streaming)
-## - api is an example of Hypermedia API support and access control
-#########################################################################
+# Exam number: Y0076998
 
 def index():
+    """
+    Home Page:
+
+    BootUp will have a home page that shows the 5 most recently created projects and the 5
+    projects closest to their funding goal.
+    
+    """
     return dict(
         popular = db(db.project).select(),
         recent = db(db.project).select()
         )
+
+@auth.requires_login()
+def dashboard():
+    return dict(projects=db(db.project.manager == auth.user).select())
+
+
+# the following controllers are provided by the 
 
 def user():
     """
@@ -31,10 +38,6 @@ def user():
     to decorate functions that need access control
     """
     return dict(form=auth())
-
-@auth.requires_login()
-def dashboard():
-    return dict(user=auth.user.id, projects=db(db.project.manager == auth.user).select())
 
 @cache.action()
 def download():
