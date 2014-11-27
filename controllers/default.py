@@ -19,9 +19,6 @@ def index():
 def dashboard():
     return dict(projects=db(db.project.manager == auth.user).select())
 
-
-# the following controllers are provided by the 
-
 def user():
     """
     exposes:
@@ -35,9 +32,26 @@ def user():
     use @auth.requires_login()
         @auth.requires_membership('group name')
         @auth.requires_permission('read','table name',record_id)
-    to decorate functions that need access control
+    to decorate functions that need access 
+
+    ...but we override the built-in web2py form for user registration
     """
-    return dict(form=auth())
+    if request.args[0] == 'register':
+        form = SQLFORM.factory(db.auth_user, db.credit_card, db.address)
+        
+        if form.accepts(request, session):
+            response.flash = XML('Registation successful. <a href="' + URL('user/login') + '">Log in?</a>')
+
+        my_extra_element = LABEL(
+            'I agree to the terms and conditions',
+            INPUT(_name='agree', _type='checkbox')
+            )
+        form[0].insert(-1,my_extra_element)
+
+        db.credit_card.number.show_if = (db.auth_user.username==True)
+    else:
+        form = auth()
+    return dict(form=form)
 
 @cache.action()
 def download():
