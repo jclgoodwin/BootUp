@@ -8,6 +8,41 @@ db = DAL("sqlite://storage.sqlite")
 
 auth = Auth(db)
 
+db.define_table(
+    'address',
+    Field('street', 'string', required = True),
+    Field('city', 'string', required = True),
+    Field('postcode', 'string', required = True),
+    Field('country', 'string', required = True),
+    )
+
+db.define_table(
+    'credit_card',
+    Field('billing_address', db.address),
+    Field('number',
+        'integer',
+        length    = 16,
+        required  = True,
+        requires  = [IS_NOT_EMPTY(), IS_LENGTH(16, 16, error_message = 'Should be 16 digits')],
+        label     = 'Credit card number',
+        represent = lambda s,r: s.number,
+        ),
+    Field('expiry_date',
+        'date',
+        required = True,
+        requires = [IS_NOT_EMPTY(), IS_DATE(error_message = 'Should be in the form YYYY-MM-DD')],
+        label    = 'Expiry date',
+        ),
+    Field('security_code',
+        'integer',
+        length   = 3,
+        required = True,
+        requires = [IS_NOT_EMPTY(), IS_DATE(error_message = 'Should 3 digits')],
+        label    = 'Security code',
+        comment  = 'The 3-digit number on the back of your card',
+        ),
+    )
+
 auth.settings.extra_fields['auth_user'] = [
     Field('birth_date',
         'date',
@@ -15,13 +50,8 @@ auth.settings.extra_fields['auth_user'] = [
         label = 'Date of birth',
         requires = [IS_NOT_EMPTY(), IS_DATE(error_message = 'Should be in the form YYYY-MM-DD')]
         ),
-    Field('credit_card_number',
-        'integer',
-        length = 16,
-        required = True,
-        label = 'Credit card number',
-        requires=[IS_NOT_EMPTY(), IS_LENGTH(16, 16, error_message = 'Should be 16 digits')]
-        ),
+    Field('credit_card', db.credit_card),
+    Field('shipping_address', db.address),
     ]
 
 auth.define_tables(username = True, signature = False)
@@ -34,3 +64,5 @@ db.auth_user.email.readable = db.auth_user.email.writable = False
 
 auth.default_messages['login_button'] = 'Log in' # verb
 auth.default_messages['register_button'] = 'Sign up'
+
+

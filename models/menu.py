@@ -15,5 +15,5 @@ if auth.is_logged_in():
 else:
     response.user_menu = [
         (T('Sign up'), False, URL('default', 'user/register')),
-        (T('Log in'), False, URL('default', 'user/login')),
+        (T('Log in'),  False, URL('default', 'user/login')),
     ]
