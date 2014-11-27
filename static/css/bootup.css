@@ -121,7 +121,7 @@ form td {
 
 .w2p_fl { /* table cell containing form field label */
     text-align: right;
-    padding-right: 10px;
+    padding-right: 5px;
     vertical-align: top;
 }
 
