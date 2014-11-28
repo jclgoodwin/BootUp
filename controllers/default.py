@@ -36,21 +36,28 @@ def user():
 
     ...but we override the built-in web2py form for user registration
     """
-    if request.args[0] == 'register':
-        form = SQLFORM.factory(db.auth_user, db.credit_card, db.address)
+    # if request.args[0] == 'register':
+    #     form = SQLFORM.factory(db.auth_user, db.credit_card, db.address)
         
-        if form.accepts(request, session):
-            response.flash = XML('Registation successful. <a href="' + URL('user/login') + '">Log in?</a>')
+    #     if form.accepts(request, session):
+    #         response.flash = XML('Registation successful. <a href="' + URL('user/login') + '">Log in?</a>')
 
-        my_extra_element = LABEL(
-            'I agree to the terms and conditions',
-            INPUT(_name='agree', _type='checkbox')
-            )
-        form[0].insert(-1,my_extra_element)
+    #     my_extra_element = LABEL(
+    #         'I agree to the terms and conditions',
+    #         INPUT(_name='agree', _type='checkbox')
+    #         )
+    #     form[0].insert(-1,my_extra_element)
 
-        db.credit_card.number.show_if = (db.auth_user.username==True)
-    else:
-        form = auth()
+    #     db.credit_card.number.show_if = (db.auth_user.username==True)
+    
+    if request.args[0] == 'login':
+        response.title = 'Log in'
+    elif request.args[0] == 'register':
+        response.title = 'Sign up'
+        response.description = XML('Sign up for an account to fund and create projects. Already signed up? <a href="' + URL('user/login') + '">Go to log in</a>')
+
+    form = auth()
+    
     return dict(form=form)
 
 @cache.action()
@@ -60,26 +67,3 @@ def download():
     http://..../[app]/default/download/[filename]
     """
     return response.download(request, db)
-
-
-def call():
-    """
-    exposes services. for example:
-    http://..../[app]/default/call/jsonrpc
-    decorate with @services.jsonrpc the functions to expose
-    supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
-    """
-    return service()
-
-
-@auth.requires_login() 
-def api():
-    """
-    this is example of API with access control
-    WEB2PY provides Hypermedia API (Collection+JSON) Experi`tal
-    """
-    from gluon.contrib.hypermedia import Collection
-    rules = {
-        '<tablename>': {'GET':{},'POST':{},'PUT':{},'DELETE':{}},
-        }
-    return Collection(db).process(request,response,rules)

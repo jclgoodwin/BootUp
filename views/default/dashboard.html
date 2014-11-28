@@ -5,28 +5,16 @@
 <h2>Dashboard</h2>
 
 <section>
-    <h3>Projects open</h3>
-    <ul class="smorgasbord">
-    {{for project in projects:}}
-        {{include 'partials/project.html'}}
-    {{pass}}
-    </ul>
-</section>
+    {{ if len(projects) == 0: }}
+        <p>You do not have any projects. <a href="{{=URL('projects', 'create')}}">Create a new project?</a></p>
+    {{ else: }}
+        <h3>Your projects</h3>
 
-<section>
-    <h3>Funded projects</h3>
-    <ul class="smorgasbord">
-    {{for project in projects:}}
-        {{include 'partials/project.html'}}
-    {{pass}}
-    </ul>
-</section>
+        <ul class="smorgasbord">
+        {{for project in projects:}}
+            {{include 'partials/project.html'}}
+        {{pass}}
+        </ul>
 
-<section>
-    <h3></h3>
-    <ul class="smorgasbord">
-    {{for project in projects:}}
-        {{include 'partials/project.html'}}
-    {{pass}}
-    </ul>
+    {{ pass }}
 </section>

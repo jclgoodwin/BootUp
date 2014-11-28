@@ -2,7 +2,21 @@
 
 {{extend 'layout.html'}}
 
-<h2>{{=T( request.args(0).replace('_',' ').capitalize() )}}</h2>
+<h2>{{
+if response.title:
+	=response.title
+else:
+	=T( request.args(0).replace('_',' ').capitalize() )
+pass
+}}</h2>
+
+{{
+if request.args(0) == 'login':
+    =P('Log in to your BootUp account to create projects and pledge funds to others')
+elif request.args(0) == 'register':
+	=T( request.args(0).replace('_',' ').capitalize() )
+pass
+}}
 
 {{=form}}
 

@@ -8,7 +8,8 @@ auth = Auth(db)
 
 if auth.is_logged_in():
     response.user_menu = [
-        (T('Projects dashboard'), False, URL('default', 'dashboard')),
+        (T('Dashboard'), False, URL('default', 'dashboard')),
+        (T('New project'), False, URL('projects', 'create')),
         (T('Profile'), False, URL('default', 'user/profile')),
         (T('Log out'), False, URL('default', 'user/logout')),
     ]

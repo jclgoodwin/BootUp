@@ -10,10 +10,10 @@ auth = Auth(db)
 
 db.define_table(
     'address',
-    Field('street', 'string', required = True),
-    Field('city', 'string', required = True),
+    Field('street',   'string', required = True),
+    Field('city',     'string', required = True),
     Field('postcode', 'string', required = True),
-    Field('country', 'string', required = True),
+    Field('country',  'string', required = True),
     )
 
 db.define_table(
@@ -47,22 +47,20 @@ auth.settings.extra_fields['auth_user'] = [
     Field('birth_date',
         'date',
         required = True,
-        label = 'Date of birth',
+        label    = 'Date of birth',
         requires = [IS_NOT_EMPTY(), IS_DATE(error_message = 'Should be in the form YYYY-MM-DD')]
         ),
-    Field('credit_card', db.credit_card),
-    Field('shipping_address', db.address),
+    Field('credit_card',      db.credit_card, writable=False, readable=False, represent=lambda id, r: db.credit_card(id).number),
+    Field('shipping_address', db.address,     writable=False, readable=False, ),
     ]
 
 auth.define_tables(username = True, signature = False)
 
-auth.settings.registration_requires_verification = False
-auth.settings.registration_requires_approval = False
+auth.settings.registration_requires_verification   = False
+auth.settings.registration_requires_approval       = False
 auth.settings.reset_password_requires_verification = True
 
 db.auth_user.email.readable = db.auth_user.email.writable = False 
 
-auth.default_messages['login_button'] = 'Log in' # verb
+auth.default_messages['login_button']    = 'Log in'
 auth.default_messages['register_button'] = 'Sign up'
-
-

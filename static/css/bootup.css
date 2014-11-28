@@ -1,16 +1,18 @@
+/* Exam number: Y0076998 */
+
 /* base styles */
 
 body {
-    color: #1a1a1a;
-    font-family: Helmet, FreeSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1a1a1a; /* very dark grey/black */
+    font-family: FreeSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 18px;
-    margin: 0 auto;
+    margin: 0 auto 36px; /* center the page horizontally */
     padding: 0 10px;
     max-width: 1000px;
 }
 
 a {
-    color: rgb(12, 12, 238);
+    color: rgb(12, 12, 238); /* bluish */
     text-decoration: none;
 }
 
@@ -19,7 +21,7 @@ a:focus {
     text-decoration: underline;
 }
 
-a:focus,
+a:focus, /* feedback/feedforward, especially useful for keyboard navigation (people with motor impairments or faulty laptop trackpads) */
 a:active {
     background: #eee;
 }
@@ -27,12 +29,12 @@ a:active {
 
 /* header */
 
-.site-header {
+.site-header { /* includes horizontal navigation bar */
     position: relative;
     margin: 0 -10px 36px;
 }
 
-.site-logo {
+.site-logo { /* "BootUp" */
     color: inherit;
     display: inline-block;
     font-size: 48px;
@@ -41,7 +43,7 @@ a:active {
     margin-top: 24px;
 }
 
-.logged-in {
+.logged-in { /* "Logged in as ____" in header */
     bottom: 30px;
     position: absolute;
     right: 10px;
@@ -50,13 +52,13 @@ a:active {
 /* horizontal navigation in header */
 
 .site-navigation {
-    background: #efefff;
+    background: #efefff; /* pale blue */
     clear: both;
     margin: 0;
     overflow: hidden;
 }
 
-    .site-navigation .user-menu {
+    .site-navigation .user-menu { /* log in, log out, register etc */
         float: right;
         margin: 0;
         padding: 0;
@@ -113,25 +115,43 @@ h3 {
 
 form table {
     border-collapse: collapse;
+    border-spacing: 0;
 }
 
 form td {
     padding-bottom: 10px;
-}
-
-.w2p_fl { /* table cell containing form field label */
-    text-align: right;
-    padding-right: 5px;
     vertical-align: top;
 }
 
-.w2p_fw { /* table cell containing form field */
-    vertical-align: bottom;
+.w2p_fl { /* table cell containing form field label */
+    font-weight: bold;
+    text-align: right;
+    padding-right: 5px;
 }
 
 .error {
     color: red;
     font-size: 14px;
+}
+
+.w2p_fc { /* table cell containing "comment" hint */
+    font-size: 14px;
+    line-height: 24px;
+    padding-left: 5px;
+}
+
+.w2p_fw select,
+.w2p_fw input[type=text] {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input#project_title {
+    font-size: 24px;
+}
+
+textarea#project_short_description {
+    height: 3em;
 }
 
 /*.btn {
