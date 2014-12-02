@@ -2,10 +2,7 @@
 
 {{extend 'layout.html'}}
 
-<h2>
-    {{=T("%s %%{project} matching", symbols=len(results))}}
-    &lsquo;{{=request.vars.search}}&rsquo;
-</h3>
+{{=H2(response.title)}}
 
 <ul class="smorgasbord">
 {{for project in results:}}

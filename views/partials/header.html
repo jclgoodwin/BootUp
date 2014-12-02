@@ -14,9 +14,16 @@
         <form class="search" action="{{=URL('projects', 'search')}}" method="GET">
             <label>
                 Search projects:
-                <input type="search" name="search" value="{{if request.vars.search:}}{{=request.vars.search}}{{pass}}" required />
+                <input type="search" name="search" value="{{=request.vars.search if request.vars.search else ''}}" required />
             </label>
             <input type="submit" value="Search" />
+        </form>
+
+        <form class="browse" action="{{=URL('projects', 'search')}}" method="GET">
+            <label>
+                Browse categories:
+                {{=SELECT([''] + PROJECT_CATEGORIES, value=request.vars.category, _id='category', _name='category')}}
+            </label>
         </form>
 
         {{if response.user_menu:}}

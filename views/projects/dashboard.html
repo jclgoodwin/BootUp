@@ -1,0 +1,13 @@
+<!-- Exam number: Y0076998 -->
+
+{{extend 'layout.html'}}
+
+{{if len(request.args) > 0 and request.args[0] == 'edit':}}
+    <h2>Edit project</h2>
+{{elif len(request.args) > 0 and request.args[0] == 'new':}}
+    <h2>Create new project</h2>
+{{else:}}
+    <h2>Dashboard</h2>
+{{pass}}
+
+{{=projects}}

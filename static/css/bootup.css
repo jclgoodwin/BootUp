@@ -1,11 +1,11 @@
 /* Exam number: Y0076998 */
 
-/* base styles */
+/* basic styles */
 
 body {
     color: #1a1a1a; /* very dark grey/black */
     font-family: FreeSans, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     margin: 0 auto 36px; /* center the page horizontally */
     padding: 0 10px;
     max-width: 1000px;
@@ -21,17 +21,38 @@ a:focus {
     text-decoration: underline;
 }
 
-a:focus, /* feedback/feedforward, especially useful for keyboard navigation (people with motor impairments or faulty laptop trackpads) */
+a:focus, /* feedback/feedforward,
+            particularly useful for keyboard navigation
+            (people with motor impairments 
+            or faulty laptop trackpads) */
 a:active {
-    background: #eee;
+    background: #efefff;
+}
+
+h2,
+h3 {
+    margin: 8px 0;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+section {
+    margin: 36px 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 
 /* header */
 
-.site-header { /* includes horizontal navigation bar */
+.site-header { /* contains horizontal navigation bar */
     position: relative;
-    margin: 0 -10px 36px;
+    margin: 0 -8px 36px;
 }
 
 .site-logo { /* "BootUp" */
@@ -39,14 +60,14 @@ a:active {
     display: inline-block;
     font-size: 48px;
     font-weight: normal;
-    margin: 10px;
+    margin: 8px;
     margin-top: 24px;
 }
 
 .logged-in { /* "Logged in as ____" in header */
-    bottom: 30px;
+    bottom: 24px;
     position: absolute;
-    right: 10px;
+    right: 8px;
 }
 
 /* horizontal navigation in header */
@@ -58,35 +79,34 @@ a:active {
     overflow: hidden;
 }
 
-    .site-navigation .user-menu { /* log in, log out, register etc */
+    .user-menu { /* log in, log out, register etc */
         float: right;
         margin: 0;
         padding: 0;
     }    
     
-    .site-navigation li {
-        display: inline-block;
-    }
-    
-    .site-navigation a {
-        display: inline-block;
-        padding: 10px;
-    }
-    
-    .site-navigation a:hover,
-    .site-navigation a:focus,
-    .site-navigation a:active {
-        background: #cfcfff;
-    }
+        .user-menu li {
+            display: inline-block;
+        }
+        
+        .user-menu a {
+            display: inline-block;
+            padding: 8px;
+        }
+        
+        .user-menu a:focus,
+        .user-menu a:active {
+            background: #cfcfff;
+        }
 
-    .site-navigation .search {
+    .site-navigation form { /* search form */
         float: left;
     }
     
-        .site-navigation .search label {
+        .site-navigation form label {
             display: inline-block;
-            padding-top: 10px;
-            padding-left: 10px;
+            padding: 8px;
+            padding-right: 0;
         }
 
 
@@ -105,28 +125,18 @@ a:active {
         font-size: 14px;
     }
 
-h2,
-h3 {
-    margin: 36px 0 16px;
-}
-
 
 /* forms */
 
-form table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
 form td {
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     vertical-align: top;
 }
 
 .w2p_fl { /* table cell containing form field label */
     font-weight: bold;
     text-align: right;
-    padding-right: 5px;
+    padding-right: 4px;
 }
 
 .error {
@@ -136,13 +146,16 @@ form td {
 
 .w2p_fc { /* table cell containing "comment" hint */
     font-size: 14px;
-    line-height: 24px;
-    padding-left: 5px;
+    padding-left: 4px;
+    padding-top: 4px;
 }
 
 .w2p_fw select,
+.w2p_fw textarea,
 .w2p_fw input[type=text] {
     box-sizing: border-box;
+    display: block;
+    margin: 0;
     width: 100%;
 }
 
@@ -154,55 +167,36 @@ textarea#project_short_description {
     height: 3em;
 }
 
-/*.btn {
-    background: #eee;
-    border: 0;
-    border-bottom: 2px solid #ccc;
-    border-radius: 4px;
-    color: black;
-    font-size: 14px;
-    margin-right: 10px;
-    padding: 5px 8px;
-}
-
-*/
 main .btn[type=submit] {
     font-size: 16px;
 }
 
-/*
-.btn:hover {
-    background: #ddd;
-}
-
-.btn:focus,
-.btn:active {
-    background: #ccc;
-}
-*/
-
 
 /*
 smorgasbord -- a collection of projects
-    (each rendered using the `partials/project.html`)
-    on a 'browse' or 'search results' or other page
 
-    arranged horizontally on a five-column grid
+(each rendered using the `partials/project.html`)
+on a 'browse' or 'search results' or other page
 
-    projects are separated by 20 pixels of space
-    */
+arranged horizontally on a five-column grid
+
+projects are separated by 20 pixels of space
+*/
 
 .smorgasbord {
-    margin: 0 -10px 36px;
+    margin: 0 -8px 36px;
     overflow: hidden;
     padding: 0;
 }
 
     .smorgasbord li {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
         float: left;
         list-style: none;
-        width: 20%;
-        padding: 0 10px;
+        margin-bottom: 18px;
+        padding: 0 8px;
+        width: 20%;        
     }
 
         .smorgasbord li > a {
@@ -212,7 +206,7 @@ smorgasbord -- a collection of projects
         .smorgasbord h4 {
             font-weight: normal;
             font-size: 18px;
-            margin: 10px 0 0;
+            margin: 4px 0 0;
         }
 
         .smorgasbord img {
@@ -226,22 +220,49 @@ smorgasbord -- a collection of projects
             overflow: hidden;
         }
 
+    .smorgasbord li:nth-child(5n + 1) { /* 1st item in every row of 5 */
+        clear: left;
+    }
+
+.web2py_grid {
+    margin-bottom: 36px;
+}
+
+.web2py_table table {
+    margin: 18px 0;
+}
+
+.web2py_table td {
+    border-top: 1px solid #ccc;
+    padding: 5px;
+}
+
+.web2py_grid .button + .button{
+    margin-left: 5px;
+}
+
+.web2py_grid .button {
+    background: #efefff; /* pale blue */
+    border-radius: 5px;
+    display: inline-block;
+    padding: 2px;
+}
+
+.web2py_table .button {
+    font-size: 14px;
+}
+
 /* styles for single project pages */
 
 figure {
     margin: 0;
 }
 
-#backers {
+#sidebar {
     float: right;
     margin-bottom: 36px;
     width: 25%;
 }
-
-    #backers h3 {
-        margin-top: 0;
-    }
-
 
 figure,
 #long-text {

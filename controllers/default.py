@@ -2,22 +2,25 @@
 
 # Exam number: Y0076998
 
+# The most basic kinds of controller
+
+from gluon.tools import Auth
+
+auth = Auth(db)
+
+print auth
+
 def index():
     """
-    Home Page:
+    "BootUp will have a home page that shows the 5 most recently created projects and the 5
+    projects closest to their funding goal."
 
-    BootUp will have a home page that shows the 5 most recently created projects and the 5
-    projects closest to their funding goal.
-    
+    Provides the view (/views/)
     """
     return dict(
         popular = db(db.project).select(),
-        recent = db(db.project).select()
-        )
-
-@auth.requires_login()
-def dashboard():
-    return dict(projects=db(db.project.manager == auth.user).select())
+        recent = db(db.project.status=='Open for pledges').select(orderby = db.project.last_updated, limitby = (0, 5)),
+    )
 
 def user():
     """
@@ -36,29 +39,41 @@ def user():
 
     ...but we override the built-in web2py form for user registration
     """
-    # if request.args[0] == 'register':
-    #     form = SQLFORM.factory(db.auth_user, db.credit_card, db.address)
-        
-    #     if form.accepts(request, session):
-    #         response.flash = XML('Registation successful. <a href="' + URL('user/login') + '">Log in?</a>')
 
-    #     my_extra_element = LABEL(
-    #         'I agree to the terms and conditions',
-    #         INPUT(_name='agree', _type='checkbox')
-    #         )
-    #     form[0].insert(-1,my_extra_element)
-
-    #     db.credit_card.number.show_if = (db.auth_user.username==True)
-    
-    if request.args[0] == 'login':
-        response.title = 'Log in'
-    elif request.args[0] == 'register':
+    if request.args[0] == 'register':
         response.title = 'Sign up'
-        response.description = XML('Sign up for an account to fund and create projects. Already signed up? <a href="' + URL('user/login') + '">Go to log in</a>')
+        response.description = XML('Sign up for an account to fund and create projects.\
+            Already signed up? <a href="' + URL('user/login') + '">Go to log in</a>')
+        form = SQLFORM.factory(db.auth_user, db.credit_card, db.address)
+        if form.process().accepted:
+            address_id = db.address.insert(**db.address._filter_fields(form.vars))
+            # (for now, assuming that billing address = shipping address)
+            form.vars.shipping_address = address_id
+            form.vars.billing_address = address_id
+            form.vars.credit_card = db.credit_card.insert(**db.credit_card._filter_fields(form.vars))
+            db.auth_user.insert(**db.auth_user._filter_fields(form.vars))
+            session.flash = 'Your account has been created'
+            # try to log in
+            session.logged_in_user = form.vars.username
+            redirect(URL('projects', 'dashboard'))
+        elif form.errors:
+            response.flash = 'Sorry, your account couldn’t be created – see errors below'
+        return dict(form=form)
 
-    form = auth()
+    # elif request.args[0] == 'profile' and auth.user:
+        # credit_card = db(db.credit_card.id == auth.user.credit_card).select()
+        # print credit_card
+        billing = SQLFORM.factory(db.credit_card, record = db(db.credit_card.id == 1).select())
+        # if form.accepts(request, session):
+            # resonse.flash = 'updated'
+        form = auth()
+        return dict(form = form, billing = billing)
+
+    elif request.args[0] == 'login':
+        response.title = 'Log in'
     
-    return dict(form=form)
+    form = auth()
+    return dict(form = form)
 
 @cache.action()
 def download():

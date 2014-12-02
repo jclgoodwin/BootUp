@@ -3,7 +3,7 @@
 {{extend 'layout.html'}}
 
 <section>
-    <h3>Popular projects</h3>
+    <h3>Popular</h3>
     <ul class="smorgasbord">
     {{for project in popular:}}
         {{include 'partials/project.html'}}
@@ -12,7 +12,7 @@
 </section>
 
 <section>
-    <h3>Recently created projects</h3>
+    <h3>New</h3>
     <ul class="smorgasbord">
     {{for project in recent:}}
         {{include 'partials/project.html'}}

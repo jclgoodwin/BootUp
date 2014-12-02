@@ -1,0 +1,23 @@
+{{extend 'layout.html'}}
+
+<h2>{{=response.title}}</h2>
+
+{{=FORM(form)}}
+
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+    function getWordcount() {
+        return document.getElementById('project_short_description').value.length;
+    }
+
+    function updateWordCountDisplay() {
+        count = getWordcount();
+        document.getElementById('project_short_description__wordcount').innerHTML = count + ' of 120 characters used';
+    }
+
+    $('#project_short_description__row .w2p_fc').append('<div id="project_short_description__wordcount"></div>');
+    
+    updateWordCountDisplay();
+    $('#project_short_description').on('click change keydown keypress keyup blur focus', updateWordCountDisplay);
+});
+</script>

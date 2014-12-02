@@ -14,11 +14,19 @@ pass
 if request.args(0) == 'login':
     =P('Log in to your BootUp account to create projects and pledge funds to others')
 elif request.args(0) == 'register':
-	=T( request.args(0).replace('_',' ').capitalize() )
+    =P('Create a BootUp account to create projects and pledge funds to others')
+elif request.args(0) == 'profile':
+	=H3('Your details')
 pass
 }}
 
 {{=form}}
+
+{{
+if request.args(0) == 'profile':
+	=H3('Your credit card')
+pass
+}}
 
 <script language="javascript"><!--
 jQuery(document).ready($) {
