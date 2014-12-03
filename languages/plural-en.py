@@ -6,5 +6,6 @@
 'mention': ['mentions'],
 'project': ['projects'],
 'result': ['results'],
+'row': ['rows'],
 'that mention': ['that mentions'],
 }

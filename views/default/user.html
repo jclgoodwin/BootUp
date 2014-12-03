@@ -4,9 +4,9 @@
 
 <h2>{{
 if response.title:
-	=response.title
+    =response.title
 else:
-	=T( request.args(0).replace('_',' ').capitalize() )
+    =T( request.args(0).replace('_',' ').capitalize() )
 pass
 }}</h2>
 
@@ -16,7 +16,7 @@ if request.args(0) == 'login':
 elif request.args(0) == 'register':
     =P('Create a BootUp account to create projects and pledge funds to others')
 elif request.args(0) == 'profile':
-	=H3('Your details')
+    =H3('Your details')
 pass
 }}
 
@@ -24,18 +24,22 @@ pass
 
 {{
 if request.args(0) == 'profile':
-	=H3('Your credit card')
+    =H3('Your credit card')
+    =credit_card_form
+
+    =H3('Your address')
+    =address_form
 pass
 }}
 
 <script language="javascript"><!--
 jQuery(document).ready($) {
-	$("#web2py_user_form input:visible:enabled:first").focus();
-	{{if request.args(0)=='register':}}
-    	web2py_validate_entropy($('#auth_user_password'),100);
-	{{elif request.args(0) in ('change_password','reset_password'):}}
-    	web2py_validate_entropy($('#no_table_new_password'),100);
-	{{pass}}
+    $("#web2py_user_form input:visible:enabled:first").focus();
+    {{if request.args(0)=='register':}}
+        web2py_validate_entropy($('#auth_user_password'),100);
+    {{elif request.args(0) in ('change_password','reset_password'):}}
+        web2py_validate_entropy($('#no_table_new_password'),100);
+    {{pass}}
 }
 //--></script>
 

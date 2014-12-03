@@ -23,7 +23,7 @@ a:focus {
 
 a:focus, /* feedback/feedforward,
             particularly useful for keyboard navigation
-            (people with motor impairments 
+            (for users with motor impairments 
             or faulty laptop trackpads) */
 a:active {
     background: #efefff;
@@ -224,32 +224,99 @@ projects are separated by 20 pixels of space
         clear: left;
     }
 
+
+/* web2py grids, as used in the logged-in user project managemenet dashboard */
+
 .web2py_grid {
     margin-bottom: 36px;
 }
 
+.web2py_counter,
 .web2py_table table {
-    margin: 18px 0;
+    margin: 16px 0;
 }
 
 .web2py_table td {
     border-top: 1px solid #ccc;
-    padding: 5px;
+}
+
+.web2py_table th,
+.web2py_table td {
+    padding: 4px 8px;
 }
 
 .web2py_grid .button + .button{
-    margin-left: 5px;
+    margin-left: 8px;
 }
 
-.web2py_grid .button {
+a.button {
     background: #efefff; /* pale blue */
-    border-radius: 5px;
+    border-radius: 4px;
     display: inline-block;
     padding: 2px;
+    border: 2px solid #cfcfff;
+    border-width: 0 1px 2px 0;
+}
+
+a.button:focus,
+a.button:active {
+    background: #cfcfff;
 }
 
 .web2py_table .button {
     font-size: 14px;
+}
+
+.button span {
+    text-decoration: inherit;
+}
+
+/* iconography */
+
+.button[title='Back']:before {
+    content: "< ";
+}
+
+.button[title='Add record to database']:before {
+    content: "+ ";
+}
+
+.button[title='Delete'],
+.button.danger {
+    color: red;
+}
+.button[title='Delete']:before {
+    content: "× ";
+}
+
+
+/* breadcrumbs and grid headers*/
+
+.form_header,
+.web2py_breadcrumbs {
+    margin: 16px 0;
+}
+
+.row_buttons a,
+.web2py_breadcrumbs a {
+    display: inline-block;
+    margin: 0 8px;
+}
+
+.form_header.row_buttons,
+.web2py_breadcrumbs ul {
+    margin-left: -8px;
+    padding: 0;
+}
+
+.web2py_breadcrumbs ul:after {
+    content:">";
+}
+
+.web2py_breadcrumbs li {
+    display: inline;
+    margin: 0;
+    padding: 0;
 }
 
 /* styles for single project pages */
@@ -264,11 +331,41 @@ figure {
     width: 25%;
 }
 
+#sidebar h3 {
+    margin-top: 24px;
+}
+
+#sidebar p {
+    margin: 0 0 16px;
+}
+
+#sidebar ul {
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar ul li {
+    list-style: none;
+    margin: 8px 0;
+}
+
+#sidebar ul li.by-logged-in-user {
+    background: #efefff;
+}
+
+#sidebar .button {
+    font-size: 14px;
+}
+
 figure,
 #long-text {
     box-sizing: border-box;
     padding-right: 20px;
     width: 75%;
+}
+
+#long-text {
+    line-height: 1.5;
 }
 
 main img {

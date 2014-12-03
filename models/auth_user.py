@@ -67,7 +67,6 @@ db.define_table(
     ),
     Field('billing_address',
         'reference address',
-        # required = True,
         writable  = False,
         readable  = False,
     ),
@@ -75,7 +74,7 @@ db.define_table(
 
 auth.settings.extra_fields['auth_user'] = [
     Field('birth_date',
-        'string',
+        'date',
         required = True,
         label    = 'Date of birth',
         comment  = 'In the format YYYY-MM-DD',

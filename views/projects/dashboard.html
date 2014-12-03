@@ -2,9 +2,9 @@
 
 {{extend 'layout.html'}}
 
-{{if len(request.args) > 0 and request.args[0] == 'edit':}}
-    <h2>Edit project</h2>
-{{elif len(request.args) > 0 and request.args[0] == 'new':}}
+{{if len(request.args) >= 2 and request.args[0] == 'project' and request.args[1] == 'edit':}}
+    <h2>Edit draft project</h2>
+{{elif len(request.args) >= 2 and request.args[0] == 'project' and request.args[1] == 'new':}}
     <h2>Create new project</h2>
 {{else:}}
     <h2>Dashboard</h2>

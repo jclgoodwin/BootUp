@@ -6,10 +6,6 @@
 # This is the menu on the top right of every page. It changes depending on whether a user is logged in
 
 
-from gluon.tools import Auth
-
-auth = Auth(db)
-
 if auth.is_logged_in():
     response.user_menu = [
         (T('Dashboard'), False, URL('projects', 'dashboard')),

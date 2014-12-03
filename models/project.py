@@ -2,7 +2,6 @@
 
 # Exam number: Y0076998
 
-from datetime import datetime
 
 # these models are defined in this file:
 # - project (Bootable)
@@ -100,35 +99,50 @@ db.define_table(
     # for the 'latest projects' query
     Field('last_updated',
         'datetime',
-        compute = lambda p: datetime.utcnow(),
+        readable = False,
+        writable = False,
     ),
 
     # to simplify the 'popular projects' query
-    Field('distance_to_funding',
+    Field('total_pledged',
         'integer',
         readable = False,
         writable = False,
     ),
+
+    format='%(title)s',
 )
 
 
 # "A set of possible pledges"
 db.define_table(
     'available_pledge',
-    Field('amount', 'integer'),
-    Field('project', db.project),
-    Field('reward', 'string'),
-    # format = '%(reward)s',
+    Field('project',
+        'reference project',
+        required = True,
+        requires = lambda p : p.status == 'Draft',
+        writable = False,
+    ),
+    Field('amount',
+        'integer',
+        required = True,
+        requires = IS_INT_IN_RANGE(1, None, error_message = 'Should be at least £1'),
+        label = 'Price',
+        comment = '(£)',
+    ),
+    Field('reward', 
+        'string',
+        required = True,
+        requires = IS_NOT_EMPTY(),
+        comment  = 'What the pledger will get in return'
+    ),
+    format = '£%(amount)s - %(reward)s',
 )
 
 
 # "A pledge list that lists all people who have pledged funding to the project"
 db.define_table(
     'pledged_pledge',
-    Field('pledger',
-        db.auth_user,
-        default = auth.user.id if auth.user else None
-    ),
-    Field('project', db.project),
-    # format = '%(reward)s',
+    Field('pledger', 'reference auth_user', default = auth.user.id if auth.user else None),
+    Field('pledge',  'reference available_pledge'),
 )

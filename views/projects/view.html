@@ -7,9 +7,46 @@
 <p>{{=project.short_description}}</p>
 
 <div id="sidebar">
-	<p>Bootable Manager: {{=project.manager}}</p>
+    <p>Manager: <strong>{{=project.manager}}</strong></p>
+    <p>Funding goal: <strong>£{{=project.funding_goal}}</strong></p>
+    <p>Total pledged: <strong>£{{=project.total_pledged}}</strong></p>
 
-    <h3>Available pledges</h3>
+    <h3>Available rewards</h3>
+
+    <ul>
+    {{for pledge in available_pledges[0]:}}
+        <li>
+            {{=pledge.reward}}
+            <a class="button" href="{{=URL('projects', 'pledge/' + str(pledge.id))}}">
+                Pledge £{{=pledge.amount}}
+            </a>
+        </li>
+    {{pass}}
+    </ul>
+
+    <h3>Pledges so far</h3>
+    {{if len(pledged_pledges):}}
+        <ul>
+            {{for pledge in pledged_pledges:}}
+                <li{{if auth.user and auth.user.username == pledge.auth_user.username:}} class="by-logged-in-user" {{pass}}>
+                    <strong>
+                        {{=pledge.auth_user.username}}
+                    </strong>
+                    {{if auth.user and auth.user.username == pledge.auth_user.username:}}
+                        (that’s you!)
+                    {{pass}}
+                    pledged
+                    <strong>
+                        £{{=pledge.available_pledge.amount}}
+                    </strong>
+                    <br />
+                    for {{=pledge.available_pledge.reward}}
+                </li>
+            {{pass}}
+        </ul>
+    {{else:}}
+        <p>No one has pledged to this project yet.</p>
+    {{pass}}
 </div>
 
 <figure>
@@ -17,9 +54,9 @@
 </figure>
 
 <div id="long-text">
-	{{=MARKMIN(project.long_description)}}
+    {{=MARKMIN(project.long_description)}}
 
-	<h3>Story</h3>
+    <h3>{{=project.manager}}’s story</h3>
 
-	{{=MARKMIN(project.story)}}
+    {{=MARKMIN(project.story)}}
 </div>
