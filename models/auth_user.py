@@ -51,11 +51,11 @@ db.define_table(
         label     = 'Credit card number',
     ),
     Field('expiry_date',
-        'string', # dubious way to avoid the web2py date picker (which does not recognise the YYYY-MM format)
+        'string', # dubious way to avoid the web2py date picker (which does not recognise the YY-MM format)
         required = True,
-        requires = [IS_NOT_EMPTY(), IS_DATE(format=T('%Y-%m'), error_message = 'Should be in the form YYYY-MM')],
+        requires = [IS_NOT_EMPTY(), IS_DATE(format=T('%y-%m'), error_message = 'Should be in the form YY-MM')],
         label    = 'Expiry date',
-        comment  = 'In the format YYYY-MM',
+        comment  = 'In the format YY-MM',
     ),
     Field('security_code',
         'integer',
